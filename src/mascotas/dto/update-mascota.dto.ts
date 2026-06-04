@@ -16,4 +16,5 @@ export class UpdateMascotaDto {
   @IsString()
   estado_vacunado?: string;
     especieId: any;
+  categoriaId: any;
 }

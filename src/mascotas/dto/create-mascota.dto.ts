@@ -1,4 +1,4 @@
-import { IsString, IsUUID, IsInt, IsBoolean, IsOptional, Min } from 'class-validator';
+import { IsString, IsUUID, IsInt, IsBoolean, IsOptional, Min, IsNumber } from 'class-validator';
 
 export class CreateMascotaDto {
   @IsUUID()
@@ -10,14 +10,15 @@ export class CreateMascotaDto {
   @IsString()
   chip?: string;
 
-  @IsString()
-  peso_kg?: string;
+  @IsNumber()
+  peso_kg?: number;
 
-  @IsString()
+  @IsNumber()
   edad?: string;
 
-  @IsString()
-  estado_vacunado?: string;
+  @IsBoolean()
+  estado_vacunado?: boolean;
+  categoriaId: any;
 
 
 }

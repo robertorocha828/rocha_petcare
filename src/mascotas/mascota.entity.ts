@@ -23,5 +23,6 @@ export class Mascota {
 
   @Column()
   estado_vacunado?: boolean;
+  categoria: any;
 
 }

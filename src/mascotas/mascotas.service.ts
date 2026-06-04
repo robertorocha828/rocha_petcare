@@ -8,7 +8,6 @@ import { UpdateMascotaDto } from './dto/update-mascota.dto';
 
 @Injectable()
 export class MascotasService {
-  mascotaRepository: any;
   constructor(
     @InjectRepository(Mascota)
     private readonly socioRepository: Repository<Mascota>,
@@ -21,21 +20,20 @@ export class MascotasService {
     const especie = await this.planRepository.findOne({ where: { id: createMascotaDto.especieId } });
     if (!especie) throw new NotFoundException('Especie no encontrado');
 
-    const mascota = this.mascotaRepository.create({
-      nombre:      createMascotaDto.nombre,
-      chip:      createMascotaDto.chip,
+    const mascota = this.socioRepository.create({
+      nombre: createMascotaDto.nombre,
+      chip: createMascotaDto.chip,
       peso_kg: createMascotaDto.peso_kg ?? 0,
-      edad:      createMascotaDto.edad ?? true,
-      estado_vacunado:      createMascotaDto.estado_vacunado ?? true,
+      edad: createMascotaDto.edad ?? true,
+      estado_vacunado: createMascotaDto.estado_vacunado ?? 0,
       especie,
-    });
+    } as unknown as Mascota);
     return this.socioRepository.save(mascota);
   }
 
   findAll() {
     return this.socioRepository.find();
   }
-
   async findOne(id: string) {
     const mascota = await this.socioRepository.findOne({ where: { id } });
     if (!mascota) throw new NotFoundException('Mascota no encontrado');
